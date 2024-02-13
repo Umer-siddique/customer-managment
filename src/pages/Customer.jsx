@@ -273,7 +273,7 @@ const Customer = () => {
               <Tr bg="white" borderRadius={"10px"} key={customer._id}>
                 <Td>
                   <img
-                    src="https://via.placeholder.com/70"
+                    src={customer.profile}
                     alt="Profile"
                     borderRadius={"6px"}
                     width="70"
