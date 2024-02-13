@@ -3,7 +3,7 @@ import { Button, Td, Tr, useTheme } from "@chakra-ui/react";
 const Customers = ({ customer, openModal }) => {
   const theme = useTheme();
   return (
-    <Tr bg="white" borderRadius={"10px"} key={customer._id}>
+    <Tr bg="white" borderRadius={"10px"}>
       <Td>
         <img
           src={customer.profile}

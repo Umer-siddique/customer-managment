@@ -112,7 +112,11 @@ const Customer = () => {
           <Tbody>
             {/* customer table rows */}
             {data?.data?.customers?.map((customer) => (
-              <Customers customer={customer} openModal={handleOpenModal1} />
+              <Customers
+                key={customer._id}
+                customer={customer}
+                openModal={handleOpenModal1}
+              />
             ))}
           </Tbody>
         </Table>
