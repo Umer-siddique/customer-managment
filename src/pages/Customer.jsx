@@ -1,110 +1,3 @@
-// import {
-//   Box,
-//   Button,
-//   Table,
-//   Thead,
-//   Tbody,
-//   Tr,
-//   Th,
-//   Td,
-//   IconButton,
-//   Icon,
-//   useTheme,
-// } from "@chakra-ui/react";
-// import { MdAdd, MdEdit, MdDelete } from "react-icons/md";
-// import React from "react";
-
-// const Customer = () => {
-//   const theme = useTheme();
-//   return (
-//     <Box color={"red"} p={4}>
-//       {/* Create New Customer Button */}
-//       <Button
-//         mb={4}
-//         colorScheme="green"
-//         leftIcon={<Icon as={MdAdd} />}
-//         backgroundImage={theme.colors.buttonGradientBackground}
-//       >
-//         Create New Customer
-//       </Button>
-
-//       {/* Table */}
-//       <Table variant="simple">
-//         <Thead bg={theme.colors.green500}>
-//           <Tr>
-//             <Th color={theme.colors.green400} textTransform={"capitalize"}>
-//               Profile
-//             </Th>
-//             <Th color={theme.colors.green400} textTransform={"capitalize"}>
-//               Username
-//             </Th>
-//             <Th color={theme.colors.green400} textTransform={"capitalize"}>
-//               Customer Name
-//             </Th>
-//             <Th color={theme.colors.green400} textTransform={"capitalize"}>
-//               Email
-//             </Th>
-//             <Th color={theme.colors.green400} textTransform={"capitalize"}>
-//               Actions
-//             </Th>
-//           </Tr>
-//         </Thead>
-//         <Tbody>
-//           {/* Manually filled table rows */}
-//           <Tr>
-//             <Td>
-//               <img src="profile1.jpg" alt="Profile" width="50" height="50" />
-//             </Td>
-//             <Td color="gray.500">john_doe</Td>
-//             <Td>John Doe</Td>
-//             <Td color="green.500">john.doe@example.com</Td>
-//             <Td>
-//               <IconButton
-//                 aria-label="Edit"
-//                 icon={<Icon as={MdEdit} />}
-//                 bg="green.500"
-//                 color="white"
-//                 mr={2}
-//               />
-//               <IconButton
-//                 aria-label="Delete"
-//                 icon={<Icon as={MdDelete} />}
-//                 bg="red.500"
-//                 color="white"
-//               />
-//             </Td>
-//           </Tr>
-//           <Tr>
-//             <Td>
-//               <img src="profile2.jpg" alt="Profile" width="50" height="50" />
-//             </Td>
-//             <Td color="gray.500">jane_smith</Td>
-//             <Td>Jane Smith</Td>
-//             <Td color="green.500">jane.smith@example.com</Td>
-//             <Td>
-//               <IconButton
-//                 aria-label="Edit"
-//                 icon={<Icon as={MdEdit} />}
-//                 bg="green.500"
-//                 color="white"
-//                 mr={2}
-//               />
-//               <IconButton
-//                 aria-label="Delete"
-//                 icon={<Icon as={MdDelete} />}
-//                 bg="red.500"
-//                 color="white"
-//               />
-//             </Td>
-//           </Tr>
-//         </Tbody>
-//       </Table>
-//     </Box>
-//   );
-// };
-
-// export default Customer;
-
 import {
   Box,
   Button,
@@ -124,10 +17,10 @@ const Customer = () => {
   const theme = useTheme();
 
   return (
-    <Box p={4}>
+    <Box p={4} overflowX="auto">
       {/* Create New Customer Button */}
       <Button
-        mb={6}
+        mb={8}
         p={4}
         colorScheme="green"
         leftIcon={<Icon as={MdAdd} />}
@@ -138,7 +31,7 @@ const Customer = () => {
       </Button>
 
       {/* Table */}
-      <Table variant="simple">
+      <Table variant="simple" minWidth="100%">
         {/* Add spacing between rows */}
         <Thead bg={theme.colors.green500} borderRadius={"10px"}>
           <Tr>
