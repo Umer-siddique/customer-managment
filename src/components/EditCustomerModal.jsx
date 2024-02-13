@@ -50,7 +50,7 @@ const EditCustomerModal = ({ openModal, closeModal, customerId }) => {
       formData.append("profileImg", photo);
     }
     try {
-      await updateCustomer(customerId, formData).unwrap();
+      await updateCustomer({ id: customerId, formData }).unwrap();
       toast({
         title: "Customer Updated.",
         description: "Customer updated successfully.",
