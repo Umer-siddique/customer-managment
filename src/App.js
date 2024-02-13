@@ -17,6 +17,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { MdMenu } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import Logo from "./images/logo.png";
+import CreateCustomer from "./pages/CreateCustomer";
 
 // Lazy loaded components
 const Customer = lazy(() => import("./pages/Customer"));
@@ -108,6 +109,7 @@ function App() {
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
                 <Route path="/customers" element={<Customer />} />
+                <Route path="/customer/create" element={<CreateCustomer />} />
                 {/* Add more routes here */}
               </Routes>
             </Suspense>
