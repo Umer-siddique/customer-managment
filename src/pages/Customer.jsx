@@ -16,6 +16,7 @@ import { useCustomersQuery } from "../services/customersApi";
 import CreateCustomerModal from "../components/CreateCustomerModal";
 import DeleteModal from "../components/DeleteModal";
 import Customers from "../components/Customers";
+import Loader from "../components/Loader";
 
 const Customer = () => {
   const { data, error, isLoading, isFetching, isSuccess } = useCustomersQuery();
@@ -36,6 +37,8 @@ const Customer = () => {
   const handleCloseModal1 = () => {
     setIsModalOpen1(false);
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
