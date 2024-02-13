@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -22,13 +23,14 @@ import {
 } from "@chakra-ui/react";
 import { MdAdd } from "react-icons/md";
 import { BsTrash3 } from "react-icons/bs";
-import React, { useState } from "react";
+import { useCustomersQuery } from "../services/customersApi";
 
 const Customer = () => {
+  const { data, error, isLoading, isFetching, isSuccess } = useCustomersQuery();
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen1, setIsModalOpen1] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -44,15 +46,15 @@ const Customer = () => {
     setIsModalOpen1(false);
   };
 
-  const handleAddCustomer = () => {
-    setIsLoading(true);
-    // Simulate an API call or any other asynchronous operation
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsModalOpen(false);
-      // Reset any form fields or state values if needed
-    }, 2000); // Simulating 2 seconds loading time
-  };
+  // const handleAddCustomer = () => {
+  //   setIsLoading(true);
+  //   // Simulate an API call or any other asynchronous operation
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //     setIsModalOpen(false);
+  //     // Reset any form fields or state values if needed
+  //   }, 2000); // Simulating 2 seconds loading time
+  // };
 
   const handleUploadPhoto = () => {
     // Simulate clicking on a file input
@@ -130,8 +132,8 @@ const Customer = () => {
             <Button
               colorScheme="green"
               backgroundImage={theme.colors.buttonGradientBackground}
-              onClick={handleAddCustomer}
-              isLoading={isLoading}
+              // onClick={handleAddCustomer}
+              // isLoading={isLoading}
               loadingText="Creating..."
               textTransform="uppercase"
               width="100%"
