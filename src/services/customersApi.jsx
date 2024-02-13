@@ -1,19 +1,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const customBaseQuery = fetchBaseQuery({
+  baseUrl: "http://localhost:8000/api/v1/",
+  prepareHeaders: (headers, { body }) => {
+    // Ensure headers are in the right format for fetch
+    const preparedHeaders = new Headers(headers);
+    if (body instanceof FormData) {
+      // If we are sending FormData, don't set content type
+      preparedHeaders.delete("Content-Type");
+    } else {
+      // Otherwise, set content type to application/json
+      preparedHeaders.set("Content-Type", "application/json");
+    }
+    return preparedHeaders;
+  },
+});
+
 export const customersApi = createApi({
   reducerPath: "customersApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/v1/",
-    prepareHeaders: (headers, { body }) => {
-      if (body instanceof FormData) {
-        return headers;
-      }
-      return {
-        ...headers,
-        "Content-Type": "application/json",
-      };
-    },
-  }),
+  baseQuery: customBaseQuery,
   tagTypes: ["Customer"],
   endpoints: (builder) => ({
     // Get All Customers
