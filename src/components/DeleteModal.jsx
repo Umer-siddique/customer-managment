@@ -10,10 +10,42 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { BsTrash3 } from "react-icons/bs";
+import { useDeleteCustomerMutation } from "../services/customersApi";
 
-const DeleteModal = ({ openModal, closeModal }) => {
+const DeleteModal = ({ openModal, closeModal, customerId }) => {
+  const toast = useToast();
+  const [deleteCustomer, { isLoading }] = useDeleteCustomerMutation();
+
+  const removeCustomer = async () => {
+    try {
+      await deleteCustomer(customerId).unwrap();
+
+      toast({
+        title: "Customer Deleted.",
+        description: "Customer deleted successfully.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    } catch (error) {
+      console.log(error);
+      if (error) {
+        toast({
+          title: "Error deleting customer.",
+          description: error?.data?.message || "An unknown error occurred.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+    }
+  };
+
   return (
     <Modal isOpen={openModal} onClose={closeModal} size="md">
       <ModalOverlay />
@@ -52,7 +84,16 @@ const DeleteModal = ({ openModal, closeModal }) => {
               </Button>
             </Box>
             <Box width="50%" textAlign="center" ml={2}>
-              <Button bg="red.500" color="white" borderRadius="md" width="100%">
+              <Button
+                bg="red.500"
+                color="white"
+                borderRadius="md"
+                width="100%"
+                onClick={removeCustomer}
+                disabled={isLoading}
+                isLoading={isLoading}
+                loadingText="Deleting..."
+              >
                 Delete
               </Button>
             </Box>

@@ -14,7 +14,7 @@ import { MdAdd } from "react-icons/md";
 
 import { useCustomersQuery } from "../services/customersApi";
 import CreateCustomerModal from "../components/CreateCustomerModal";
-import DeleteModal from "../components/DeleteModal";
+// import DeleteModal from "../components/DeleteModal";
 import Customers from "../components/Customers";
 import Loader from "../components/Loader";
 
@@ -22,21 +22,21 @@ const Customer = () => {
   const { data, error, isLoading, isFetching, isSuccess } = useCustomersQuery();
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpen1, setIsModalOpen1] = useState(false);
+  // const [isModalOpen1, setIsModalOpen1] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
-  const handleOpenModal1 = () => {
-    setIsModalOpen1(true);
-  };
+  // const handleOpenModal1 = () => {
+  //   setIsModalOpen1(true);
+  // };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  const handleCloseModal1 = () => {
-    setIsModalOpen1(false);
-  };
+  // const handleCloseModal1 = () => {
+  //   setIsModalOpen1(false);
+  // };
 
   if (isLoading) return <Loader />;
 
@@ -48,7 +48,7 @@ const Customer = () => {
         closeModal={handleCloseModal}
       />
       {/* DELETE CUSTOMER MODAL */}
-      <DeleteModal openModal={isModalOpen1} closeModal={handleCloseModal1} />
+      {/* <DeleteModal openModal={isModalOpen1} closeModal={handleCloseModal1} /> */}
 
       {/* Customers Table */}
       <Box p={4}>
@@ -115,11 +115,7 @@ const Customer = () => {
           <Tbody>
             {/* customer table rows */}
             {data?.data?.customers?.map((customer) => (
-              <Customers
-                key={customer._id}
-                customer={customer}
-                openModal={handleOpenModal1}
-              />
+              <Customers key={customer._id} customer={customer} />
             ))}
           </Tbody>
         </Table>
