@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -31,6 +31,8 @@ const Customer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   // const [isLoading, setIsLoading] = useState(false);
+
+  // console.log(data?.data?.customers);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -267,45 +269,48 @@ const Customer = () => {
           </Thead>
           <Tbody>
             {/* Manually filled table rows */}
-            <Tr bg="white" borderRadius={"10px"}>
-              <Td>
-                <img
-                  src="https://via.placeholder.com/70"
-                  alt="Profile"
-                  borderRadius={"6px"}
-                  width="70"
-                  height="70"
-                />
-              </Td>
-              <Td color={theme.colors.gray500} fontSize="md">
-                john_doe
-              </Td>
-              <Td
-                fontSize="md"
-                color={theme.colors.green500}
-                textDecoration={"underline"}
-              >
-                John Doe
-              </Td>
-              <Td color={theme.colors.gray500} fontSize="md">
-                john.doe@example.com
-              </Td>
-              <Td>
-                <Button bg={"green.100"} color="green" size="sm" w={"100px"}>
-                  Edit
-                </Button>
-                <Button
-                  size="sm"
-                  bg={"red.100"}
-                  color="red"
-                  w={"100px"}
-                  ml={4}
-                  onClick={handleOpenModal1}
+            {data?.data?.customers?.map((customer) => (
+              <Tr bg="white" borderRadius={"10px"} key={customer._id}>
+                <Td>
+                  <img
+                    src="https://via.placeholder.com/70"
+                    alt="Profile"
+                    borderRadius={"6px"}
+                    width="70"
+                    height="70"
+                  />
+                </Td>
+                <Td color={theme.colors.gray500} fontSize="md">
+                  {customer.username}
+                </Td>
+                <Td
+                  fontSize="md"
+                  color={theme.colors.green500}
+                  textDecoration={"underline"}
+                  textTransform={"capitalize"}
                 >
-                  Delete
-                </Button>
-              </Td>
-            </Tr>
+                  {customer.customerName}
+                </Td>
+                <Td color={theme.colors.gray500} fontSize="md">
+                  {customer.email}
+                </Td>
+                <Td>
+                  <Button bg={"green.100"} color="green" size="sm" w={"100px"}>
+                    Edit
+                  </Button>
+                  <Button
+                    size="sm"
+                    bg={"red.100"}
+                    color="red"
+                    w={"100px"}
+                    ml={4}
+                    onClick={handleOpenModal1}
+                  >
+                    Delete
+                  </Button>
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </Box>
