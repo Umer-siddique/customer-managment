@@ -39,7 +39,7 @@ const CreateCustomer = () => {
     <>
       {/* Add New Customer Button */}
 
-      {/* Modal */}
+      {/* CREATE AND UPDATE CUSTOMER MODAL */}
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} size="md">
         <ModalOverlay />
         <ModalContent>
