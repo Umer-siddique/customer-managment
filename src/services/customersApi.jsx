@@ -45,10 +45,10 @@ export const customersApi = createApi({
     }),
     // Update Customer
     updateCustomer: builder.mutation({
-      query: ({ id, ...rest }) => ({
+      query: (id, formData) => ({
         url: `/customers/${id}`,
         method: "PATCH",
-        body: rest,
+        body: formData,
       }),
       invalidatesTags: ["Customer"],
     }),

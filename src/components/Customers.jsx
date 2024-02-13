@@ -1,28 +1,48 @@
 import { Button, Td, Tr, useTheme } from "@chakra-ui/react";
 import DeleteModal from "./DeleteModal";
 import { useState } from "react";
+import EditCustomerModal from "./EditCustomerModal";
 
 const Customers = ({ customer }) => {
   const theme = useTheme();
   const [customerId, setCustomerId] = useState(null);
-  const [isModalOpen1, setIsModalOpen1] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
 
-  const handleOpenModal1 = (id) => {
-    setIsModalOpen1(true);
+  const handleOpenDeleteModal = (id) => {
+    setDeleteModalOpen(true);
     setCustomerId(id);
   };
 
-  const handleCloseModal1 = () => {
-    setIsModalOpen1(false);
+  const handleOpenEditModal = (id) => {
+    setEditModalOpen(true);
+    setCustomerId(id);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setDeleteModalOpen(false);
+  };
+
+  const handleCloseEditModal = () => {
+    setEditModalOpen(false);
   };
 
   return (
     <>
+      {/* DELETE MODAL */}
       <DeleteModal
-        openModal={isModalOpen1}
-        closeModal={handleCloseModal1}
+        openModal={isDeleteModalOpen}
+        closeModal={handleCloseDeleteModal}
         customerId={customerId}
       />
+
+      {/* UPDATE MODAL */}
+      <EditCustomerModal
+        openModal={isEditModalOpen}
+        closeModal={handleCloseEditModal}
+        customerId={customerId}
+      />
+
       <Tr bg="white" borderRadius={"10px"}>
         <Td>
           <img
@@ -48,7 +68,13 @@ const Customers = ({ customer }) => {
           {customer?.email}
         </Td>
         <Td>
-          <Button bg={"green.100"} color="green" size="sm" w={"100px"}>
+          <Button
+            bg={"green.100"}
+            color="green"
+            size="sm"
+            w={"100px"}
+            onClick={() => handleOpenEditModal(customer?._id)}
+          >
             Edit
           </Button>
           <Button
@@ -57,7 +83,7 @@ const Customers = ({ customer }) => {
             color="red"
             w={"100px"}
             ml={4}
-            onClick={() => handleOpenModal1(customer?._id)}
+            onClick={() => handleOpenDeleteModal(customer?._id)}
           >
             Delete
           </Button>

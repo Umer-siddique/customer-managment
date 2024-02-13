@@ -11,32 +11,23 @@ import {
   useTheme,
 } from "@chakra-ui/react";
 import { MdAdd } from "react-icons/md";
-
-import { useCustomersQuery } from "../services/customersApi";
-import CreateCustomerModal from "../components/CreateCustomerModal";
-// import DeleteModal from "../components/DeleteModal";
-import Customers from "../components/Customers";
 import Loader from "../components/Loader";
+import CreateCustomerModal from "../components/CreateCustomerModal";
+import Customers from "../components/Customers";
+import { useCustomersQuery } from "../services/customersApi";
 
 const Customer = () => {
-  const { data, error, isLoading, isFetching, isSuccess } = useCustomersQuery();
+  const { data, isLoading } = useCustomersQuery();
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [isModalOpen1, setIsModalOpen1] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
-  // const handleOpenModal1 = () => {
-  //   setIsModalOpen1(true);
-  // };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-  // const handleCloseModal1 = () => {
-  //   setIsModalOpen1(false);
-  // };
 
   if (isLoading) return <Loader />;
 
@@ -47,8 +38,6 @@ const Customer = () => {
         openModal={isModalOpen}
         closeModal={handleCloseModal}
       />
-      {/* DELETE CUSTOMER MODAL */}
-      {/* <DeleteModal openModal={isModalOpen1} closeModal={handleCloseModal1} /> */}
 
       {/* Customers Table */}
       <Box p={4}>
