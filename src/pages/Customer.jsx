@@ -87,6 +87,7 @@ const Customer = () => {
           w="max-content"
         >
           {/* Table Header */}
+          {sortedCustomers?.results === 0 && <Box>No Customers found!</Box>}
           <Thead bg={theme.colors.green500} borderRadius={"10px"}>
             <Tr>
               <Th
