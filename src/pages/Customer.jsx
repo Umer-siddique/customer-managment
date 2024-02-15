@@ -62,7 +62,7 @@ const Customer = () => {
       />
 
       {/* Customers Table */}
-      <Box p={4}>
+      <Box p={4} overflowX="auto">
         {/* Create New Customer Button */}
         <Button
           mb={8}
@@ -77,7 +77,15 @@ const Customer = () => {
         </Button>
 
         {/* Table */}
-        <Table variant="simple" minWidth="100%">
+        <Table
+          // variant="simple"
+          // minWidth="100%"
+          // w={"1300px"}
+          // overflowX={"scroll"}
+          variant="simple"
+          minWidth="100%"
+          w="max-content"
+        >
           {/* Table Header */}
           <Thead bg={theme.colors.green500} borderRadius={"10px"}>
             <Tr>
