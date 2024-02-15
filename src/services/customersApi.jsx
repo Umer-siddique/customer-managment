@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 const customBaseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8000/api/v1/",
+  baseUrl: `${BASE_URL}/api/v1/`,
   prepareHeaders: (headers, { body }) => {
     const preparedHeaders = new Headers(headers);
     if (body instanceof FormData) {
