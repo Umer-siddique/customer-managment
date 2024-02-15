@@ -60,12 +60,25 @@ export const customersApi = createApi({
       }),
       invalidatesTags: ["Customer"],
     }),
+
+    sortedCustomers: builder.query({
+      query: (sortBy) => `/customers?sort=${sortBy}`,
+      providesTags: (result) =>
+        result && Array.isArray(result)
+          ? [
+              ...(result.map(({ _id }) => ({ type: "Customer", id: _id })) ||
+                []),
+              "Customer",
+            ]
+          : ["Customer"],
+    }),
   }),
 });
 
 export const {
   useCustomersQuery,
   useCustomerQuery,
+  useSortedCustomersQuery,
   useCreateCustomerMutation,
   useUpdateCustomerMutation,
   useDeleteCustomerMutation,

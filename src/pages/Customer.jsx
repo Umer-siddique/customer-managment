@@ -9,15 +9,25 @@ import {
   Th,
   Icon,
   useTheme,
+  Text,
+  HStack,
 } from "@chakra-ui/react";
 import { MdAdd } from "react-icons/md";
+import { LiaSortSolid } from "react-icons/lia";
 import Loader from "../components/Loader";
 import CreateCustomerModal from "../components/CreateCustomerModal";
 import Customers from "../components/Customers";
-import { useCustomersQuery } from "../services/customersApi";
+
+import {
+  useCustomersQuery,
+  useSortedCustomersQuery,
+} from "../services/customersApi";
 
 const Customer = () => {
+  const [sortColumn, setSortColumn] = useState(""); // Track the currently sorted column
   const { data, isLoading } = useCustomersQuery();
+  const { data: sortedData, isLoading: isSortedLoading } =
+    useSortedCustomersQuery(sortColumn); // Use the new sorted data query hook
   const theme = useTheme();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,7 +39,19 @@ const Customer = () => {
     setIsModalOpen(false);
   };
 
-  if (isLoading) return <Loader />;
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortColumn(`-${column}`);
+    } else {
+      setSortColumn(column);
+    }
+  };
+
+  const sortedCustomers = sortColumn
+    ? sortedData?.data?.customers
+    : data?.data?.customers;
+
+  if (isLoading || isSortedLoading) return <Loader />;
 
   return (
     <>
@@ -72,24 +94,36 @@ const Customer = () => {
                 textTransform={"capitalize"}
                 fontSize="md"
                 fontWeight="600"
+                onClick={() => handleSort("username")}
               >
-                Username
+                <HStack>
+                  <Text>Username</Text>
+                  <LiaSortSolid cursor={"pointer"} />
+                </HStack>
               </Th>
               <Th
                 color={theme.colors.green400}
                 textTransform={"capitalize"}
                 fontSize="md"
                 fontWeight="600"
+                onClick={() => handleSort("customerName")}
               >
-                Customer Name
+                <HStack>
+                  <Text>Customer Name</Text>
+                  <LiaSortSolid cursor={"pointer"} />
+                </HStack>
               </Th>
               <Th
                 color={theme.colors.green400}
                 textTransform={"capitalize"}
                 fontSize="md"
                 fontWeight="600"
+                onClick={() => handleSort("email")}
               >
-                Email
+                <HStack>
+                  <Text>Email</Text>
+                  <LiaSortSolid cursor={"pointer"} />
+                </HStack>
               </Th>
               <Th
                 color={theme.colors.green400}
@@ -103,7 +137,7 @@ const Customer = () => {
           </Thead>
           <Tbody>
             {/* customer table rows */}
-            {data?.data?.customers?.map((customer) => (
+            {sortedCustomers?.map((customer) => (
               <Customers key={customer._id} customer={customer} />
             ))}
           </Tbody>
